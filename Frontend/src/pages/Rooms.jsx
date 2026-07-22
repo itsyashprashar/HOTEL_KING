@@ -19,16 +19,18 @@ const Rooms = () => {
     const fetchRooms = async () => {
       try {
         setLoading(true);
+
         let endpoint = "https://hotel-king.onrender.com/api/hotels";
         let config = {};
 
-        // If we have date constraints from the widget, fetch availability
-        if (searchState && searchState.checkIn && searchState.checkOut) {
-          endpoint =
-            "https://hotel-king.onrender.com/api/hotels/availability";
+        if (searchState?.checkIn && searchState?.checkOut) {
+          endpoint = "https://hotel-king.onrender.com/api/hotels/availability";
+
           config = {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify({
               checkIn: searchState.checkIn,
               checkOut: searchState.checkOut,
@@ -36,44 +38,23 @@ const Rooms = () => {
           };
         }
 
-        const res = await fetch(endpoint, config);
-        const data = await res.json();
-        setRooms(data);
-      } catch (error) {
-        console.error("Error fetching rooms:", error);
-        setRooms([
-          {
-            _id: "1",
-            image: `/images/room1.jpg`,
-            name: "Presidential Suite",
-            price: 25999,
-            description:
-              "Mumbai - Luxurious accommodation with premium amenities, offering breathtaking views and unparalleled comfort for an unforgettable stay.",
-            amenities: ["Luxury Bed", "Free WiFi", "Smart TV"],
-          },
-          {
-            _id: "2",
-            image: `/images/room2.jpg`,
-            name: "Executive Suite",
-            price: 18999,
-            description:
-              "Delhi - Experience the ultimate luxury and comfort in this beautifully appointed space.",
-            amenities: ["Luxury Bed", "Free WiFi", "Smart TV"],
-          },
-          {
-            _id: "3",
-            image: `/images/room3.jpg`,
-            name: "Hotel King",
-            price: 15000,
-            description:
-              "Jaipur - Perfect for both leisure and business travelers seeking an unforgettable stay.",
-            amenities: ["Luxury Bed", "Free WiFi", "Smart TV"],
-          },
-        ]);
+        const response = await fetch(endpoint, config);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch rooms");
+        }
+
+        const data = await response.json();
+
+        setRooms(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error(err);
+        setRooms([]);
       } finally {
         setLoading(false);
       }
     };
+
     fetchRooms();
   }, [searchState]);
 
@@ -140,13 +121,12 @@ const Rooms = () => {
                 >
                   <div className="relative h-[250px] overflow-hidden">
                     <img
-                      src={
-                        room.image
-                          ? `/images/${room.image}`
-                          : `/images/room1.jpg`
-                      }
+                      src={room.image || "/images/room1.jpg"}
                       alt={room.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      onError={(e) => {
+                        e.target.src = "/images/room1.jpg";
+                      }}
                     />
                   </div>
 
