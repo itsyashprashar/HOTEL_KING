@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-secondary bg-background text-primary leading-relaxed text-base;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-primary text-primary mb-4;
+  }
+
+  a {
+    @apply text-secondary transition-colors duration-300;
+  }
+
+  a:hover {
+    @apply text-accent;
+  }
+}
+
+@layer utilities {
+  .clip-path-slant {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f9f7f1; /* background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bfa14a; /* secondary */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f0c674; /* accent */
+}
