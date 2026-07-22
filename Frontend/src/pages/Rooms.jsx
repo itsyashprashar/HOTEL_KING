@@ -19,13 +19,13 @@ const Rooms = () => {
     const fetchRooms = async () => {
       try {
         setLoading(true);
-        let endpoint = "https://hotel-king-backend.onrender.com/api/hotels";
+        let endpoint = "https://hotel-king.onrender.com/api/hotels";
         let config = {};
 
         // If we have date constraints from the widget, fetch availability
         if (searchState && searchState.checkIn && searchState.checkOut) {
           endpoint =
-            "https://hotel-king-backend.onrender.com/api/hotels/availability";
+            "https://hotel-king.onrender.com/api/hotels/availability";
           config = {
             method: "POST",
             headers: { "Content-Type": "application/json" },

@@ -20,7 +20,7 @@ const HotelDetails = () => {
     const fetchHotel = async () => {
       try {
         const res = await fetch(
-          `https://hotel-king-backend.onrender.com/api/hotels/${id}`,
+          `https://hotel-king.onrender.com/api/hotels/${id}`,
         );
         if (!res.ok) throw new Error("Failed to fetch hotel details");
         const data = await res.json();
@@ -89,7 +89,7 @@ const HotelDetails = () => {
 
     try {
       const res = await fetch(
-        "https://hotel-king-backend.onrender.com/api/bookings",
+        "https://hotel-king.onrender.com/api/bookings",
         {
           method: "POST",
           headers: {

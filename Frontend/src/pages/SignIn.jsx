@@ -16,8 +16,8 @@ const SignIn = () => {
     setError("");
 
     const endpoint = isLogin
-      ? "https://hotel-king-backend.onrender.com/api/auth/login"
-      : "https://hotel-king-backend.onrender.com/api/auth/register";
+      ? "https://hotel-king.onrender.com/api/auth/login"
+      : "https://hotel-king.onrender.com/api/auth/register";
     const payload = isLogin ? { email, password } : { name, email, password };
 
     try {

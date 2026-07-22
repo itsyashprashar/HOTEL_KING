@@ -19,7 +19,7 @@ const MyBookings = () => {
 
       try {
         const res = await fetch(
-          "https://hotel-king-backend.onrender.com/api/bookings",
+          "https://hotel-king.onrender.com/api/bookings",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -50,7 +50,7 @@ const MyBookings = () => {
     const token = localStorage.getItem("token");
     try {
       const res = await fetch(
-        `https://hotel-king-backend.onrender.com0/api/bookings/${id}`,
+        `https://hotel-king.onrender.com/api/bookings/${id}`,
         {
           method: "DELETE",
           headers: {
